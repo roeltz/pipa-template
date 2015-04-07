@@ -1,0 +1,9 @@
+RewriteEngine on
+
+#Change this to suit your app
+RewriteBase /template/
+
+#Rewrite everything else 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php [QSA]
