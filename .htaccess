@@ -1,7 +1,7 @@
 RewriteEngine on
 
 #Change this to suit your app
-RewriteBase /template/
+RewriteBase /
 
 #Rewrite everything else 
 RewriteCond %{REQUEST_FILENAME} !-f

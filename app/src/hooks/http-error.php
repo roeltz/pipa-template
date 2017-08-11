@@ -6,9 +6,11 @@ use Pipa\Dispatch\Exception\SecurityException;
 use Pipa\Event\EventSource;
 use Pipa\Error\ErrorHandler;
 use Pipa\Error\LoggerErrorDisplay;
+use Pipa\HTTP\Response;
 use Pipa\Registry\Registry;
 use Monolog\Logger;
 use Monolog\Handler\ChromePHPHandler;
+
 
 // Go install Chrome Logger
 Registry::setSingleton("httpLogger", function(){
@@ -26,8 +28,16 @@ EventSource::expect('Pipa\Dispatch\Dispatch', 'error', function(Dispatch $dispat
 	if ($dispatch->exception instanceof SecurityException) {
 		// If you want this to work, make sure you have the "security" hook enabled
 		// and a real Main::login (or whatever) controller method
-		$dispatch->sub("Main::login", array('exception'=>$dispatch->exception))->run();
+
+		$referrer = $dispatch->request->getURL();
+		$dispatch->sub(function(Response $response) use($referrer){
+			$response->redirectLocal("login?referrer=".urlencode($referrer));
+		})->run();
 	} else {
 		$dispatch->sub("Errors::view", array('exception'=>$dispatch->exception))->run();
 	}
 });
+
+function debug($value) {
+	Registry::httpLogger()->debug(var_export($value, true));
+}
