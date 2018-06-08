@@ -1,17 +1,16 @@
 <?php
 
-require_once 'environment.php';
-
 use Pipa\Dispatch\ExpressionRouter;
 use Pipa\Console\ConsoleContext;
-use Pipa\Importer\Importer;
 
-Importer::hook("console-error");
+require_once __DIR__."/environment.php";
+
+ConsoleContext::hook("console-error");
 
 ConsoleContext::get()->dispatch(
-	new ExpressionRouter(array(
+	new ExpressionRouter([
 		''=>function(){
 			echo "Hello World!";
 		}
-	))
+	])
 );

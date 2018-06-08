@@ -1,6 +1,6 @@
 <?php
 
-require_once 'app/environment.php';
+require_once "app/environment.php";
 
 use Pipa\Dispatch\ExpressionRouter;
 use Pipa\Dispatch\ViewSelector;
@@ -11,12 +11,12 @@ use Pipa\HTTP\View\PartialsFilter;
 HTTPContext::hook("http-error", "json");
 
 HTTPContext::get()->dispatch(
-	new ExpressionRouter(array(
+	new ExpressionRouter([
 		'GET /'=>'Main::index'
-	)),
-	new ViewSelector(array(
+	]),
+	new ViewSelector([
 		'accept json'=>'Pipa\HTTP\View\JSONView',
 		'option view-engine json'=>'Pipa\HTTP\View\JSONView',
 		'default'=>new PHPView(new PartialsFilter())
-	))
+	])
 );
