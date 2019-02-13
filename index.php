@@ -8,11 +8,11 @@ use Pipa\HTTP\HTTPContext;
 use Pipa\HTTP\View\PHPView;
 use Pipa\HTTP\View\PartialsFilter;
 
-HTTPContext::hook("http-error", "json");
+HTTPContext::hook("http-error", "security", "json");
 
 HTTPContext::get()->dispatch(
 	new ExpressionRouter([
-		'GET /'=>'Main::index'
+		'GET	/'=>'Main::index'
 	]),
 	new ViewSelector([
 		'accept json'=>'Pipa\HTTP\View\JSONView',
