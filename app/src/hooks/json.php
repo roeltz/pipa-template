@@ -1,6 +1,5 @@
 <?php
 
-use DateTime;
 use Pipa\Dispatch\Dispatch;
 use Pipa\Dispatch\View;
 use Pipa\Event\EventSource;
