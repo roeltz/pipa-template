@@ -1,3 +1,4 @@
-.settings
 .project
+.settings
+.vscode
 app/vendor

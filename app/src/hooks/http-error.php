@@ -1,15 +1,15 @@
 <?php
 
+use Monolog\Handler\ChromePHPHandler;
+use Monolog\Logger;
 use Pipa\Config\Config;
 use Pipa\Dispatch\Dispatch;
 use Pipa\Dispatch\Exception\SecurityException;
-use Pipa\Event\EventSource;
 use Pipa\Error\ErrorHandler;
+use Pipa\Event\EventSource;
 use Pipa\Error\LoggerErrorDisplay;
 use Pipa\HTTP\Response;
 use Pipa\Registry\Registry;
-use Monolog\Logger;
-use Monolog\Handler\ChromePHPHandler;
 
 
 // Go install Chrome Logger
@@ -20,7 +20,7 @@ Registry::setSingleton("httpLogger", function(){
 	return $logger;
 });
 
-EventSource::expect('Pipa\Dispatch\Dispatch', 'error', function(Dispatch $dispatch){
+EventSource::expect(Dispatch::class, "error", function(Dispatch $dispatch){
 
 	if (Config::get("http.logger"))
 		Registry::httpLogger()->error(get_class($dispatch->exception).": ".$dispatch->exception->getMessage());
@@ -34,7 +34,7 @@ EventSource::expect('Pipa\Dispatch\Dispatch', 'error', function(Dispatch $dispat
 			$response->redirectLocal("login?referrer=".urlencode($referrer));
 		})->run();
 	} else {
-		$dispatch->sub("Errors::view", array('exception'=>$dispatch->exception))->run();
+		$dispatch->sub("Errors::view", array("exception"=>$dispatch->exception))->run();
 	}
 });
 

@@ -1,0 +1,22 @@
+{
+	"data": {
+		"sources": {
+			"default": {
+				"db": "test",
+				"host": "localhost",
+				"user": "root",
+				"password": "",
+				"options": {}
+			}
+		},
+		"logger": {
+			"level": "100",
+			"path#file": "../log/data.log"
+		}
+	},
+	"http": {
+		"base-url": "/pipa-template/",
+		"views-dir#path": "../src/views/",
+		"logger": true
+	}
+}

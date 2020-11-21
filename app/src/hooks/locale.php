@@ -4,12 +4,11 @@ use Pipa\Dispatch\Dispatch;
 use Pipa\Dispatch\Localization;
 use Pipa\Dispatch\Session;
 use Pipa\Event\EventSource;
-use Pipa\Locale\MoResource;
 use Pipa\HTTP\Locale\HeaderLocaleExtractor;
 use Pipa\HTTP\Locale\SessionLocaleExtractor;
 use Pipa\HTTP\Locale\URILocaleExtractor;
 
-EventSource::expect('Pipa\Dispatch\Dispatch', 'init', function(Dispatch $dispatch){
+EventSource::expect(Dispatch::class, "init", function(Dispatch $dispatch){
 	Localization::attach($dispatch)
 		// Set accepted locale codes
 		->accept("en", "es", "fr")

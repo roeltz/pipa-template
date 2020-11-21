@@ -26,13 +26,13 @@ class Errors {
 
 		return new Result(
 			array(
-				'error'=>true,
-				'message'=>$message
+				"error"=>true,
+				"message"=>$message
 			),
 			array(
-				'view'=>'error',
-				'http-status-code'=>$statusCode,
-				'exception'=>$exception
+				"view"=>"error",
+				"http-status-code"=>$statusCode,
+				"exception"=>$exception
 			)
 		);
 	}

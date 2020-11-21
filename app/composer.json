@@ -6,6 +6,9 @@
 		"pipa/orm": "*"
 	},
 	"autoload": {
+		"files": [
+			"environment.php"
+		],
 		"psr-0": {
 			"": ["src/controllers/", "src/model/"]
 		}
